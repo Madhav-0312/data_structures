@@ -2,7 +2,7 @@
 #include<stdio.h>
 int binary_search(int a[],int s,int n)
 {int l=0;
-int r=n-1;
+int r=s-1;
 while(l<=r)
 {int mid=l+(r-l)/2;
 if(n==a[mid])
