@@ -1,30 +1,31 @@
 
 #include<stdio.h>
+int binary_search(int a[],int s,int n)
+{int l=0;
+int r=s-1;
+while(l<=r)
+{int mid=l+(r-l)/2;
+if(n==a[mid])
+return mid;
+if(n>a[mid])
+l=mid+1;
+else
+r=mid-1;
+}
+return -1;
+}
 void main()
-{ int mid,l=0,n,s,r;
-int a[100];
-scanf("%d",&n);
-for(int i=0;i<n;i++)
+{int s;
+scanf("%d",&s);
+int a[s];
+for(int i=0;i<s;i++)
 {scanf("%d",&a[i]);
 }
 int num;
 scanf("%d",&num);
-mid=n;
-r=n-1;
-int pos;
-while(l<=r)
-{mid=l+(r-1)/2;
-if(n<a[mid])
-{r=mid-1;
+int res=binary_search(a,s,num);
+if(res==-1)
+printf("Number not present");
+else
+printf("Number present at %d position",res);
 }
-else if(n>a[mid])
-{l=mid+1;
-}
-else if(n==a[mid])
-{pos=mid;
-break;
-}
-}
-printf("%d",pos);
-}
-
