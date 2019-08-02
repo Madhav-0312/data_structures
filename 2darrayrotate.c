@@ -4,10 +4,15 @@ int main(void) {
 	int n;
 	scanf("%d",&n);
 	int a[n][n];
+	int r;
+	
 	for(int i=0;i<n;i++)	{	
 		for(int j=0;j<n;j++)
 			scanf("%d",&a[i][j]);
 	}
+	scanf("%d",&r);
+	while(r>0)
+	{
 	int temp=0,temp1=1,l;
 	if(n>3) 
 	l=n-2;
@@ -39,6 +44,7 @@ int main(void) {
 		temp++;
 		l--;
 	}
+	r--;}
 	for(int i=0;i<n;i++)	{
 		for(int j=0;j<n;j++)	
 			printf("%d ",a[i][j]);
