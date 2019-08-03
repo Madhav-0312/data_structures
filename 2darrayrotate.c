@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 int main(void) {
-	int n;
+	int n,m;
 	scanf("%d",&n);
 	int a[n][n];
 	int r;
@@ -14,10 +14,7 @@ int main(void) {
 	while(r>0)
 	{
 	int temp=0,temp1=1,l;
-	if(n>3) 
-	l=n-2;
-	else
-	l=1;
+	l=n/2;
 	while(l>0)	{
 		int t=a[temp][temp];
 		int i,j;
@@ -32,9 +29,7 @@ int main(void) {
 		j=n-temp1;
 		for(i=n-temp1;i>temp;i--)
 			a[i][j]=a[i-1][j];
-		
-		if(i==j)
-			a[i][j]=a[i-1][j];
+	
 		i=temp;
 		for(j=n-temp1;j>temp;j--)
 			a[i][j]=a[i][j-1];
