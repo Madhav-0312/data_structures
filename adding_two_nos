@@ -1,0 +1,112 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ * 
+ * typedef struct ListNode listnode;
+ * 
+ * listnode* listnode_new(int val) {
+ *     listnode* node = (listnode *) malloc(sizeof(listnode));
+ *     node->val = val;
+ *     node->next = NULL;
+ *     return node;
+ * }
+ */
+/**
+ * @input A : Head pointer of linked list 
+ * @input B : Head pointer of linked list 
+ * 
+ * @Output head pointer of list.
+ */
+listnode* addTwoNumbers(listnode* A, listnode* B) 
+{
+    int c=0,sum=0;
+    listnode* ptr1=A;
+    listnode* ptr2=B;
+    listnode* temp=NULL;
+    
+    while(ptr1 || ptr2)
+    {
+        sum=ptr1->val+ptr2->val+c;
+        if(sum>=10)
+        {
+            c=1;
+            ptr1->val=sum-10;
+        }
+        else
+        {
+            c=0;
+            ptr1->val=sum;
+        }
+        if(ptr1->next==NULL)
+            temp=ptr1;
+        ptr1=ptr1->next;
+        ptr2=ptr2->next;
+        if(ptr2!=NULL && ptr1==NULL)
+        {
+            ptr1=temp;
+            while(ptr2)
+            {
+                sum=ptr2->val+c;
+                if(sum>9 && ptr2->next==NULL)
+                {
+                    ptr2->val=sum-10;
+                    ptr1->next=ptr2;
+                    ptr1=ptr1->next;
+                    listnode* node = (listnode*)malloc(sizeof(listnode));
+                    node->val=1;
+                    node->next=NULL;
+                    ptr1->next=node;
+                    return A;
+                }
+                if(sum>9)
+                {
+                    c=1;
+                    ptr2->val=sum-10;
+                    ptr1->next=ptr2;
+                    ptr1=ptr1->next;
+                    ptr2=ptr2->next;
+                }
+                else
+                {
+                    ptr1->next=ptr2;
+                    return A;
+                }
+            }
+        }
+        else if(ptr1!=NULL && ptr2==NULL)
+        {
+            while(ptr1)
+            {
+                sum=ptr1->val+c;
+                if(sum>9 && ptr1->next==NULL)
+                {
+                    ptr1->val=sum-10;
+                    listnode* node = (listnode*)malloc(sizeof(listnode));
+                    node->val=1;
+                    node->next=NULL;
+                    ptr1->next=node;
+                    return A;
+                }
+                {
+                    
+                }
+                if(sum>9)
+                {
+                    c=1;
+                    ptr1->val=sum-10;
+                    ptr1=ptr1->next;
+                }
+                else
+                {
+                    ptr1->val=sum;
+                     return A;   
+                }
+            }
+        }
+    }
+    return A;
+    
+}

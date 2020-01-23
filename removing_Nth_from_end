@@ -1,0 +1,38 @@
+listnode* removeNthFromEnd(listnode* A, int B)
+{
+    int c=0;
+    int i=0;
+    listnode *curr=A;
+    
+    while(curr)
+    {
+        c++;
+        curr=curr->next;
+    }
+    curr=A;
+    if(B>=c || c==1)
+    {
+        A=A->next;
+        return A;
+    }
+    else if(B==1)
+    {
+        while(curr)
+        {
+            if(curr->next->next == NULL)
+            {
+                curr->next=NULL;
+                return A;
+            }
+            curr=curr->next;
+        }
+    }
+    while(i<(c-B))
+    {
+        i++;
+        curr=curr->next;
+    }
+    curr->next=curr->next->next;
+    return A;
+    
+}

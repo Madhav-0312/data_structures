@@ -1,0 +1,85 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ * 
+ * typedef struct ListNode listnode;
+ * 
+ * listnode* listnode_new(int val) {
+ *     listnode* node = (listnode *) malloc(sizeof(listnode));
+ *     node->val = val;
+ *     node->next = NULL;
+ *     return node;
+ * }
+ */
+/**
+ * @input A : Head pointer of linked list 
+ * 
+ * @Output head pointer of list.
+ */
+listnode* reorderList(listnode* A) 
+{
+    int len=0,i=0;
+    listnode* curr=A;
+    listnode* p1=A;
+    listnode* p2=A;
+    listnode* prev=A;
+    if(curr->next == NULL || curr->next->next == NULL)
+        return A;
+    else if(curr->next->next->next==NULL)
+    {
+        p1=curr->next;
+        p2=curr->next->next;
+        curr->next=p2;
+        p2->next=p1;
+        p1->next=NULL;
+        return A;
+    }
+    
+    
+    while(curr)
+    {
+        len++;
+        curr=curr->next;
+    }
+    
+    while(i<((len/2)-1))
+    {
+        i++;
+        p2=p2->next;
+    }
+    
+    prev=p2->next;
+    curr=prev->next;
+    
+    while(curr)
+    {
+        prev->next=curr->next;
+        curr->next=p2->next;
+        p2->next=curr;
+        curr=prev->next;
+    }
+    curr=p2->next;
+    prev=p1->next;
+    
+    while(prev!=p2)
+    {
+        p1->next=curr;
+        p1=p1->next;
+        curr=curr->next;
+        p1->next=prev;
+        p1=p1->next;
+        prev=prev->next;
+    }
+    p1->next=curr;
+    p1=p1->next;
+    curr=curr->next;
+    p1->next=prev;
+    p1=p1->next;
+    p1->next=curr;
+    
+    return A;
+    
+}

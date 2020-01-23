@@ -1,0 +1,55 @@
+int lPalin(listnode* A) 
+{
+    listnode *p1=A;
+    listnode *p2=A;
+    listnode *prev=A;
+    listnode *curr=prev->next;
+    int c=0,i=0;
+    
+    while(p2)
+    {
+        c++;
+        p2=p2->next;
+    }
+    
+    p2=A;
+    i=0;
+    
+    while(i<((c-1)/2))
+    {
+        i++;
+        p2=p2->next;
+    }
+    
+    if(c==1)
+    {
+        return 1;
+    }
+
+    
+    i=0;
+    prev=p2->next;
+    curr=prev->next;
+    
+    while(curr)
+    {
+        prev->next=curr->next;
+        curr->next=p2->next;
+        p2->next=curr;
+        curr=prev->next;
+    }
+    
+    p2=p2->next;
+    
+    while(p2)
+    {
+        if(p1->val != p2->val)
+        {
+            return 0;
+        }
+        p2=p2->next;
+        p1=p1->next;
+    }
+    
+    return 1;
+}

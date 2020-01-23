@@ -1,0 +1,97 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ * 
+ * typedef struct ListNode listnode;
+ * 
+ * listnode* listnode_new(int val) {
+ *     listnode* node = (listnode *) malloc(sizeof(listnode));
+ *     node->val = val;
+ *     node->next = NULL;
+ *     return node;
+ * }
+ */
+/**
+ * @input A : Head pointer of linked list 
+ * @input B : Integer
+ * 
+ * @Output head pointer of list.
+ */
+listnode* partition(listnode* A, int B) 
+{
+    listnode* prev=A;
+    if(prev->next == NULL)
+        return A;
+    listnode* curr=prev->next;
+    listnode* p1=curr;
+    listnode* p2=curr;
+    
+    if(prev->val >= B)
+    {
+        while(prev->val >= B && prev)
+        {
+            if(prev->next!=NULL && prev->next->val < B)
+            {
+                p2=prev;
+            }
+            prev=prev->next;
+            if(prev==NULL)
+            {
+                return A;
+            }
+        }
+        curr=prev->next;
+        prev->next=A;
+        A=prev;
+        p2->next=curr;
+        curr=prev->next;
+        p1=curr;
+        p2=curr;
+    }
+    
+    while(curr)
+    {
+        if(curr->val >= B)
+        {
+            while(curr && curr->val >= B)
+            {
+                if( curr->next != NULL && curr->next->val < B)
+                {
+                    p2=curr;
+                }
+                curr=curr->next;
+            }
+            if(curr==NULL)
+            {
+                return A;
+            }
+            prev->next=curr;
+            p2->next=curr->next;
+            curr->next=p1;
+            prev=curr;
+            if(p2->next==NULL)
+            {
+                return A;
+            }
+            curr=curr->next;
+            p1=curr;
+            p2=curr;
+        }
+        else
+        {
+            prev=curr;
+            if(curr->next==NULL)
+            {
+                return A;
+            }
+            curr=curr->next;
+            p1=curr;
+            p2=curr;
+        }
+    }
+    
+    return A;
+}
